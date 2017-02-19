@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <style>
+      body{
+        margin: 0;
+      }
+      canvas{
+        width: 100%;
+        height: 100%
+      }
+
+      .thumbnail {
+        width: 33.3333333%;
+        display: block;
+        float: left;
+      }
+
+      @media (max-width: 600px) {
+        .thumbnail {
+          width: 50%;
+        }
+      }
+
+      .thumbnail img {
+        width: 100%;
+      }
+
+      .back {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        color: white;
+        text-decoration: none;
+        background-color: rgba(200,200,200,0.7);
+        padding: 5px 10px;
+        font-size: 0.8em;
+        font-family: sans-serif;
+      }
+
+    </style>
+    <link rel="stylesheet" href="lib/iosOverlay/iosOverlay.css">
+  </head>
+  <body  ng-app="app">
+    
+    <div ui-view></div>
+
+  </body>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+  <script src="angular-ui-router.min.js"></script>
+
+  <script src="three.min.js"></script>
+  <script src="lib/iosOverlay/iosOverlay.js"></script>
+  <script src="lib/iosOverlay/spin.min.js"></script>
+  
+  <script type="text/javascript">
+    var app = angular.module("app", ["ui.router"]);
+
+    app.config(function ($stateProvider, $urlRouterProvider) {
+      $stateProvider
+        .state('/list', {
+          url: '',
+          templateUrl: 'list.html',
+          controller: 'ListCtrl',
+        })
+        .state('/image', {
+          url: '/image',
+          templateUrl: 'detail.html',
+          controller: 'DetailCtrl',
+        });
+    });
+
+    app.filter('encode', function() {
+      return window.encodeURIComponent;
+    });
+
+    app.service("files", function() {
+      return [
+        {"small": "SMALL/R0012400.JPG", "big": "BIG/R0012400_.JPG"},
+        {"small": "SMALL/R0012401.JPG", "big": "BIG/R0012401_.JPG"},
+        {"small": "SMALL/R0012402.JPG", "big": "BIG/R0012402_.JPG"},
+        {"small": "SMALL/R0012403.JPG", "big": "BIG/R0012403_.JPG"},
+        {"small": "SMALL/R0012404.JPG", "big": "BIG/R0012404_.JPG"},
+        {"small": "SMALL/R0012405.JPG", "big": "BIG/R0012405_.JPG"},
+        {"small": "SMALL/R0012406.JPG", "big": "BIG/R0012406_.JPG"},
+        {"small": "SMALL/R0012408.JPG", "big": "BIG/R0012408_.JPG"},
+        {"small": "SMALL/R0012410.JPG", "big": "BIG/R0012410_.JPG"},
+        {"small": "SMALL/R0012415.JPG", "big": "BIG/R0012415_.JPG"},
+        {"small": "SMALL/R0012421.JPG", "big": "BIG/R0012421_.JPG"},
+        {"small": "SMALL/R0012423.JPG", "big": "BIG/R0012423_.JPG"},
+        {"small": "SMALL/R0012427.JPG", "big": "BIG/R0012427_.JPG"},
+        {"small": "SMALL/R0012433.JPG", "big": "BIG/R0012433_.JPG"},
+        {"small": "SMALL/R0012438.JPG", "big": "BIG/R0012438_.JPG"},
+        {"small": "SMALL/R0012443.JPG", "big": "BIG/R0012443_.JPG"},
+        {"small": "SMALL/R0012444.JPG", "big": "BIG/R0012444_.JPG"},
+        {"small": "SMALL/R0012447.JPG", "big": "BIG/R0012447_.JPG"},
+        {"small": "SMALL/R0012449.JPG", "big": "BIG/R0012449_.JPG"},
+        {"small": "SMALL/R0012451.JPG", "big": "BIG/R0012451_.JPG"},
+        {"small": "SMALL/R0012452.JPG", "big": "BIG/R0012452_.JPG"},
+        {"small": "SMALL/R0012455.JPG", "big": "BIG/R0012455_.JPG"},
+        {"small": "SMALL/R0012457.JPG", "big": "BIG/R0012457_.JPG"},
+        {"small": "SMALL/R0012459.JPG", "big": "BIG/R0012459_.JPG"},
+        {"small": "SMALL/R0012468.JPG", "big": "BIG/R0012468_.JPG"},
+        {"small": "SMALL/R0012472.JPG", "big": "BIG/R0012472_.JPG"},
+        {"small": "SMALL/R0012474.JPG", "big": "BIG/R0012474_.JPG"},
+        {"small": "SMALL/R0012475.JPG", "big": "BIG/R0012475_.JPG"}
+      ];
+    })
+
+    app.controller("ListCtrl", function($rootScope, $location, $scope, files) {
+
+      console.log($location.search("url"));
+
+      $rootScope.files = $rootScope.files || files;
+
+    });
+
+  </script>
+  <script src="DetailCtrl.js"></script>
+  <script src="overlay.js"></script>
+  <script src="viewer.js"></script>
+  <!-- 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js"></script> 
+  -->
+
+</html>
